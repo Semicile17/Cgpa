@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CGPA Calculator</title>
+  <title>CGPA Scheme Converter</title>
   <style>
     body {
       font-family: Arial;
@@ -27,13 +27,9 @@
       border: none;
     }
     button {
-      background: #38bdf8;
-      color: black;
+      background: #22c55e;
       font-weight: bold;
       cursor: pointer;
-    }
-    h2 {
-      text-align: center;
     }
     #result {
       margin-top: 15px;
@@ -45,36 +41,40 @@
 <body>
 
 <div class="box">
-  <h2>CGPA Calculator</h2>
+  <h2>CGPA Converter</h2>
 
-  <input type="number" id="currentCgpa" placeholder="Current CGPA" step="0.01">
-  <input type="number" id="currentCredits" placeholder="Total Credits Completed">
-  <input type="number" id="newSgpa" placeholder="New Semester SGPA" step="0.01">
-  <input type="number" id="newCredits" placeholder="New Semester Credits">
-
-  <button onclick="calculateCGPA()">Calculate</button>
+  <input type="number" id="cgpa" placeholder="Enter Current CGPA" step="0.01">
+  <button onclick="convert()">Convert</button>
 
   <div id="result"></div>
 </div>
 
 <script>
-function calculateCGPA() {
-  let currentCgpa = parseFloat(document.getElementById("currentCgpa").value);
-  let currentCredits = parseFloat(document.getElementById("currentCredits").value);
-  let newSgpa = parseFloat(document.getElementById("newSgpa").value);
-  let newCredits = parseFloat(document.getElementById("newCredits").value);
+function convert() {
+  let cgpa = parseFloat(document.getElementById("cgpa").value);
 
-  if (isNaN(currentCgpa) || isNaN(currentCredits) || isNaN(newSgpa) || isNaN(newCredits)) {
-    document.getElementById("result").innerText = "Please fill all fields correctly!";
+  if (isNaN(cgpa)) {
+    document.getElementById("result").innerText = "Enter valid CGPA!";
     return;
   }
 
-  let totalPoints = (currentCgpa * currentCredits) + (newSgpa * newCredits);
-  let totalCredits = currentCredits + newCredits;
+  let updated;
 
-  let updatedCgpa = totalPoints / totalCredits;
+  // 🔥 EDIT THIS LOGIC BASED ON YOUR EXCEL
 
-  document.getElementById("result").innerText = "Updated CGPA: " + updatedCgpa.toFixed(2);
+  // Example 1: Linear scaling
+  // updated = cgpa * 1.05;
+
+  // Example 2: Range-based mapping (more likely your case)
+  if (cgpa >= 9) updated = 10;
+  else if (cgpa >= 8) updated = 9;
+  else if (cgpa >= 7) updated = 8;
+  else if (cgpa >= 6) updated = 7;
+  else if (cgpa >= 5) updated = 6;
+  else updated = 5;
+
+  document.getElementById("result").innerText = 
+    "Updated CGPA: " + updated.toFixed(2);
 }
 </script>
 
