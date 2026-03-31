@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CGPA Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 10px;
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #38bdf8;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    h2 {
+      text-align: center;
+    }
+    #result {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>CGPA Calculator</h2>
+
+  <input type="number" id="currentCgpa" placeholder="Current CGPA" step="0.01">
+  <input type="number" id="currentCredits" placeholder="Total Credits Completed">
+  <input type="number" id="newSgpa" placeholder="New Semester SGPA" step="0.01">
+  <input type="number" id="newCredits" placeholder="New Semester Credits">
+
+  <button onclick="calculateCGPA()">Calculate</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+function calculateCGPA() {
+  let currentCgpa = parseFloat(document.getElementById("currentCgpa").value);
+  let currentCredits = parseFloat(document.getElementById("currentCredits").value);
+  let newSgpa = parseFloat(document.getElementById("newSgpa").value);
+  let newCredits = parseFloat(document.getElementById("newCredits").value);
+
+  if (isNaN(currentCgpa) || isNaN(currentCredits) || isNaN(newSgpa) || isNaN(newCredits)) {
+    document.getElementById("result").innerText = "Please fill all fields correctly!";
+    return;
+  }
+
+  let totalPoints = (currentCgpa * currentCredits) + (newSgpa * newCredits);
+  let totalCredits = currentCredits + newCredits;
+
+  let updatedCgpa = totalPoints / totalCredits;
+
+  document.getElementById("result").innerText = "Updated CGPA: " + updatedCgpa.toFixed(2);
+}
+</script>
+
+</body>
+</html>
